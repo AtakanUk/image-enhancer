@@ -1,0 +1,16 @@
+# Install CUDA-enabled PyTorch from the official index first:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+torch>=2.1
+torchvision>=0.16
+opencv-python>=4.8
+numpy>=1.24
+Pillow>=10.0
+requests>=2.28
+PySide6-Essentials>=6.6
+
+# Face detection, alignment and parsing for face restoration.
+# Note: the gfpgan and basicsr packages are deliberately NOT installed.
+# basicsr imports torchvision.transforms.functional_tensor, which was removed
+# in torchvision 0.17, so it fails to import. The GFPGAN architecture is kept
+# standalone under src/core/arch/ instead.
+facexlib>=0.3.0

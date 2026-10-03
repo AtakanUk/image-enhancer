@@ -1,0 +1,21 @@
+# Model weights are downloaded automatically on first use and must not be
+# committed (~680 MB in total). Their sources are defined in src/core/models.py
+# and in facexlib.
+models/*
+!models/.gitkeep
+
+# Output
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
