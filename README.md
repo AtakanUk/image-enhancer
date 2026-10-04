@@ -1,5 +1,9 @@
 # Image Enhancer
 
+[![tests](https://github.com/AtakanUk/image-enhancer/actions/workflows/tests.yml/badge.svg)](https://github.com/AtakanUk/image-enhancer/actions/workflows/tests.yml)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 A desktop app that upscales photos and videos with AI to a resolution you choose: 720p to 4K, 8K, a multiplier, or a custom size. Built with PySide6 and PyTorch on top of Real-ESRGAN (upscaling) and GFPGAN (face restoration) weights.
 
 **Stack:** Python 3.12 · PyTorch (CUDA, FP16) · PySide6 · OpenCV · facexlib · ffmpeg
