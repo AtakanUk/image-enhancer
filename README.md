@@ -4,6 +4,10 @@ A desktop app that upscales photos and videos with AI to a resolution you choose
 
 **Stack:** Python 3.12 · PyTorch (CUDA, FP16) · PySide6 · OpenCV · facexlib · ffmpeg
 
+![Bicubic vs. Image Enhancer](docs/images/comparison.jpg)
+
+*Both columns start from the same input: a test photo shrunk 4× (to 112 px) and saved as a quality-75 JPEG. Left: bicubic upscale. Right: Image Enhancer with the Photo x4 model and face restoration. Photos are public domain / CC0; see [credits](THIRD_PARTY_NOTICES.md#sample-images).*
+
 ---
 
 ## Highlights
@@ -60,6 +64,11 @@ pytest
 The tests run on the CPU in a few seconds and need no GPU, model weights, ffmpeg or Qt; tiny random networks stand in for the real models. They cover the resolution planner, seam-free tiling (tiled vs. single-pass output), self-ensemble transforms, DNI weight blending, ffmpeg command building, EXIF rotation and Unicode paths. GitHub Actions runs them on every push.
 
 ## Usage
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/screenshot-dark.png">
+  <img alt="Main window after processing four photos and a video" src="docs/images/screenshot-light.png">
+</picture>
 
 1. Drag and drop photos or videos onto the file list (folders work too; all media files inside are picked up).
 2. Choose a **target resolution**: a preset (720p … 8K), a multiplier (×2, ×4 …) or a custom size.
@@ -186,6 +195,7 @@ src/app/
   main_window.py            PySide6 UI
   worker.py                 background worker thread
 tests/                      pytest suite (CPU only)
+docs/images/                README images
 models/                     downloaded weights (not committed)
 ```
 

@@ -14,6 +14,15 @@ The network architectures in `src/core/arch/` are derived from the projects belo
 - **BasicSR**: Copyright 2018-2022 BasicSR Authors. Apache License 2.0, full text in [`LICENSES/BasicSR.txt`](LICENSES/BasicSR.txt).
 - **GFPGAN**: Copyright (C) 2021 THL A29 Limited, a Tencent company. All rights reserved. Apache License 2.0, full text (including the licenses of its third-party components) in [`LICENSES/GFPGAN.txt`](LICENSES/GFPGAN.txt). GFPGAN's license lists its StyleGAN2 code as modified from [rosinality/stylegan2-pytorch](https://github.com/rosinality/stylegan2-pytorch) (MIT, Copyright (c) 2019 Kim Seonghyeon). The "clean" variant used here does not include the custom CUDA kernels that fall under the NVIDIA license.
 
+## Sample images
+
+The pictures in `docs/images/` were made with test photos from the [scikit-image](https://github.com/scikit-image/scikit-image) sample data:
+
+- `astronaut.png`: Eileen Collins, NASA. Public domain.
+- `chelsea.png`: Stefan van der Walt. CC0.
+- `coffee.png`: Rachel Michetti. CC0.
+- `rocket.jpg`: SpaceX. Public domain.
+
 ## Model weights
 
 Pretrained weights (Real-ESRGAN, GFPGAN, facexlib) are not included in this repository. They are downloaded at runtime from the authors' official releases and remain under their respective licenses.
