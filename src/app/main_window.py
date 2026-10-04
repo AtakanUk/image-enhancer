@@ -7,7 +7,7 @@ from pathlib import Path
 
 import torch
 from PySide6.QtCore import QSettings, Qt, QUrl
-from PySide6.QtGui import QDesktopServices, QFont
+from PySide6.QtGui import QColor, QDesktopServices, QFont, QPalette
 from PySide6.QtWidgets import (
     QAbstractItemView, QApplication, QCheckBox, QComboBox, QDoubleSpinBox,
     QFileDialog, QFormLayout, QFrame, QGroupBox, QHBoxLayout, QLabel,
@@ -720,7 +720,7 @@ class MainWindow(QMainWindow):
 STYLE = """
 QWidget { font-size: 13px; }
 QLabel#h1 { font-size: 17px; font-weight: 600; padding-bottom: 2px; }
-QLabel#dim { color: palette(mid); font-size: 11px; }
+QLabel#dim { font-size: 11px; }
 QLabel#status { font-weight: 600; }
 QLabel#estimate {
     border: 1px solid palette(mid); border-radius: 6px;
@@ -748,11 +748,34 @@ QProgressBar::chunk { background: #3a8ee6; border-radius: 4px; }
 """
 
 
+def _mix(a: QColor, b: QColor, t: float) -> QColor:
+    """Blend b into a by t (0..1)."""
+    return QColor(round(a.red() + (b.red() - a.red()) * t),
+                  round(a.green() + (b.green() - a.green()) * t),
+                  round(a.blue() + (b.blue() - a.blue()) * t))
+
+
+def apply_style(app: QApplication) -> None:
+    """Fusion style with a palette that stays readable in light and dark themes.
+
+    In Windows dark mode Qt's palette has a navy AlternateBase and a Mid color
+    almost identical to the background, which hides borders and secondary
+    text. Those roles are derived from the window and text colors instead.
+    """
+    app.setStyle("Fusion")
+    pal = app.palette()
+    window, text = pal.color(QPalette.Window), pal.color(QPalette.WindowText)
+    pal.setColor(QPalette.AlternateBase, _mix(window, text, 0.06))
+    pal.setColor(QPalette.Mid, _mix(window, text, 0.3))
+    app.setPalette(pal)
+    dim = _mix(window, text, 0.6).name()
+    app.setStyleSheet(STYLE + f"QLabel#dim {{ color: {dim}; }}\n")
+
+
 def main() -> int:
     app = QApplication(sys.argv)
     app.setApplicationName("Image Enhancer")
-    app.setStyle("Fusion")
-    app.setStyleSheet(STYLE)
+    apply_style(app)
     win = MainWindow()
     win.show()
     return app.exec()
