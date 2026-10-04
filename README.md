@@ -50,6 +50,15 @@ python main.py          # or run.bat on Windows
 
 Model weights are downloaded into `models/` the first time they are needed, and only the ones you use. Upscaling models are 2–64 MB each; face restoration additionally needs GFPGAN (333 MB), the face detector (104 MB) and the face parser (81 MB).
 
+### Tests
+
+```bash
+pip install pytest
+pytest
+```
+
+The tests run on the CPU in a few seconds and need no GPU, model weights, ffmpeg or Qt; tiny random networks stand in for the real models. They cover the resolution planner, seam-free tiling (tiled vs. single-pass output), self-ensemble transforms, DNI weight blending, ffmpeg command building, EXIF rotation and Unicode paths. GitHub Actions runs them on every push.
+
 ## Usage
 
 1. Drag and drop photos or videos onto the file list (folders work too; all media files inside are picked up).
@@ -176,6 +185,7 @@ src/core/
 src/app/
   main_window.py            PySide6 UI
   worker.py                 background worker thread
+tests/                      pytest suite (CPU only)
 models/                     downloaded weights (not committed)
 ```
 
